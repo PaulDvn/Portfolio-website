@@ -1,0 +1,95 @@
+Fire Station;Latitude;Longitude;Geo_zone;Categ_geo
+Hornsey;51.586460;-0.127290;Nord;Banlieue
+Woodford;51.607600;0.033600;Nord-Est;Banlieue
+Dagenham;51.559266;0.156838;Est;Banlieue
+Wandsworth;51.458300;-0.192100;Sud-Ouest;Urbain
+Fulham;51.474400;-0.204100;Ouest;Urbain
+Wimbledon;51.421300;-0.205700;Sud-Ouest;Banlieue
+Battersea;51.470000;-0.164000;Sud-Ouest;Urbain
+Tooting;51.429900;-0.167900;Sud;Banlieue
+Stratford;51.541700;-0.002800;Est;Urbain
+Acton;51.513200;-0.267300;Ouest;Banlieue
+Chiswick;51.492100;-0.256900;Ouest;Banlieue
+Ealing;51.513200;-0.305100;Ouest;Banlieue
+Hammersmith;51.492800;-0.226200;Ouest;Urbain
+Park Royal;51.526800;-0.270600;Ouest;Banlieue
+Brixton;51.463800;-0.113200;Sud;Urbain
+Mitcham;51.400500;-0.168000;Sud;Banlieue
+Soho;51.514500;-0.135000;Centre;Urbain
+Paddington;51.519400;-0.172500;Ouest;Urbain
+Euston;51.528500;-0.133900;Centre;Urbain
+Islington;51.546500;-0.105700;Centre-Nord;Urbain
+Lambeth;51.492600;-0.121000;Sud;Urbain
+Holloway;51.552500;-0.122800;Nord;Urbain
+Barnet;51.645000;-0.174400;Nord;Banlieue
+Shoreditch;51.526300;-0.078800;Est;Urbain
+Whitechapel;51.517600;-0.061300;Est;Urbain
+Kentish Town;51.553800;-0.143800;Nord;Urbain
+Heston;51.482700;-0.373000;Ouest;Banlieue
+Northolt;51.548100;-0.368600;Ouest;Banlieue
+Harrow;51.578100;-0.333600;Nord-Ouest;Banlieue
+Kensington;51.501400;-0.195500;Ouest;Urbain
+Chelsea;51.487200;-0.169500;Ouest;Urbain
+North Kensington;51.518600;-0.219500;Ouest;Urbain
+East Ham;51.532400;0.050400;Est;Banlieue
+Clapham;51.465500;-0.136200;Sud;Urbain
+Dockhead;51.499800;-0.076500;Sud-Est;Urbain
+Peckham;51.474400;-0.070600;Sud-Est;Urbain
+Willesden;51.547000;-0.243900;Nord-Ouest;Banlieue
+Feltham;51.449600;-0.408200;Ouest;Banlieue
+Southall;51.511200;-0.375300;Ouest;Banlieue
+Stanmore;51.616200;-0.301200;Nord-Ouest;Banlieue
+Hendon;51.590600;-0.230400;Nord;Banlieue
+Mill Hill;51.613000;-0.242700;Nord;Banlieue
+Finchley;51.600200;-0.191200;Nord;Banlieue
+Forest Hill;51.439000;-0.053600;Sud-Est;Banlieue
+Twickenham;51.446600;-0.329600;Ouest;Banlieue
+Tottenham;51.597500;-0.071700;Nord;Banlieue
+Wallington;51.360000;-0.151000;Sud;Banlieue
+Hayes;51.512600;-0.420200;Ouest;Banlieue
+Hornchurch;51.554000;0.218600;Est;Banlieue
+Kingston;51.412200;-0.299600;Sud-Ouest;Banlieue
+Leyton;51.557000;-0.005500;Est;Urbain
+Southgate;51.632200;-0.128800;Nord;Banlieue
+Surbiton;51.390900;-0.306500;Sud-Ouest;Banlieue
+Plumstead;51.486000;0.085300;Sud-Est;Banlieue
+Heathrow;51.472200;-0.455700;Ouest;Banlieue
+Harold Hill;51.601200;0.212200;Est;Banlieue
+Romford;51.575500;0.183800;Est;Banlieue
+Ilford;51.559800;0.075300;Est;Banlieue
+Woodside;51.400600;-0.070400;Sud;Banlieue
+Edmonton;51.612000;-0.061600;Nord;Banlieue
+Sutton;51.360000;-0.194600;Sud;Banlieue
+West Hampstead;51.548500;-0.192600;Nord-Ouest;Urbain
+New Malden;51.400700;-0.255400;Sud-Ouest;Banlieue
+Croydon;51.372700;-0.097100;Sud;Banlieue
+Shadwell;51.511700;-0.055000;Est;Urbain
+Enfield;51.645000;-0.060000;Nord;Banlieue
+Homerton;51.552300;-0.043300;Est;Urbain
+Leytonstone;51.563700;0.008100;Est;Banlieue
+New Cross;51.475300;-0.031100;Sud-Est;Urbain
+Richmond;51.458000;-0.306600;Ouest;Banlieue
+Walthamstow;51.590000;-0.015000;Nord-Est;Banlieue
+Purley;51.337000;-0.113800;Sud;Banlieue
+Norbury;51.414200;-0.121700;Sud;Banlieue
+West Norwood;51.429000;-0.101400;Sud;Banlieue
+Lewisham;51.462000;-0.011400;Sud-Est;Urbain
+Plaistow;51.524600;0.023600;Est;Urbain
+Erith;51.482000;0.173100;Est;Banlieue
+Beckenham;51.408400;-0.030100;Sud-Est;Banlieue
+Greenwich;51.479100;-0.001500;Sud-Est;Urbain
+Deptford;51.475100;-0.025300;Sud-Est;Urbain
+Stoke Newington;51.562800;-0.074100;Nord;Urbain
+Bethnal Green;51.523600;-0.059200;Est;Urbain
+Orpington;51.374500;0.097800;Sud-Est;Banlieue
+Chingford;51.631600;-0.011300;Nord-Est;Banlieue
+Poplar;51.507500;-0.018000;Est;Urbain
+Barking;51.533000;0.080000;Est;Banlieue
+Wembley;51.554000;-0.296400;Nord-Ouest;Banlieue
+Ruislip;51.574000;-0.421800;Ouest;Banlieue
+East Greenwich;51.486200;-0.004200;Sud-Est;Urbain
+Hillingdon;51.533500;-0.452300;Ouest;Banlieue
+Hainault;51.603100;0.120300;Est;Banlieue
+Eltham;51.452200;0.054100;Sud-Est;Banlieue
+Lee Green;51.449700;0.013500;Sud-Est;Banlieue
+Bromley;51.406000;0.015800;Sud-Est;Banlieue

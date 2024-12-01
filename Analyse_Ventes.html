@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Analyse des Ventes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #intro {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+        }
+
+        #intro h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        #intro p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        .content-box {
+            background: white;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 10px; /* Espace entre les boutons */
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Rendre les boutons égaux en taille */
+            max-width: 600px; /* Largeur maximale des boutons */
+        }   
+
+        .nav-tabs button:hover {
+            background: #ddd;
+            color: #084110;
+            transform: translateY(-2px); /* Effet de soulèvement au survol */
+        }
+
+        .nav-tabs button.active {
+            background:#bd1128;
+            color: white;
+            border: 2px solid #333;
+        }
+
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Left Button -->
+        <a href="index.html" class="return-btn"><i class="fas fa-home"></i></a>
+
+        <!-- Intro -->
+        <div id="intro">
+            <img src="images/Online Sales/carlos-muza-hpjSkU2UYSU-unsplash.jpg" alt="Online sales">
+            <h1>Online Sales<br />Optimiser les revenus des ventes en ligne et limiter les retours produits.</h1>
+            <p>Nous analyserons les catégories de produits, les canaux de vente, les méthode de paiement et la logistique d'un site de vente en ligne qui dipose également de points de vente physiques.</p>
+            <div id="project-buttons" style="text-align: center; margin-top: 20px;">
+                <!-- Bouton pour GitHub -->
+                <a href="https://github.com/PaulDvn/Portfolio-projects/tree/Online-Sales" target="_blank" style="text-decoration: none;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #24292e; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔗 Voir le projet sur GitHub
+                    </button>
+                </a>
+                <!-- Bouton pour télécharger le fichier HTML -->
+                <a href="HTML/Online sales.html" download style="text-decoration: none; margin-left: 10px;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        📥 Télécharger le fichier HTML
+                    </button>
+                </a>
+                <a href="Datasets/Online sales" download style="text-decoration: none; margin-left: 10px;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        📥 Télécharger le jeu de données
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <main id="main">
+            <div class="content-box">
+        
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-link active" data-tab="dataset">📊 Exploration du Jeu de Données</button>
+                    <button class="tab-link" data-tab="univariate">📈 Analyse Univariée</button>
+                    <button class="tab-link" data-tab="Evolution des revenus">Evolution des revenus</button>
+                    <button class="tab-link" data-tab="Segment">🔗 Analyse des Performances par Segment</button>
+                    <button class="tab-link" data-tab="multivariate">📚 Analyse Multivariée</button>
+                    <button class="tab-link" data-tab="conclusion">✅ Conclusion et Recommandations</button>
+                </div>
+        
+                <!-- Dataset Exploration -->
+                <div id="dataset" class="tab-content active">
+                    <br>
+                    <h2>🌍 Exploration du jeu de données</h2>
+                    <img src="images/Online Sales/Exploration du jeu de données.jpg" alt="Exploration jeu de données" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>La suppression des valeurs manquantes sur la colonne Customer ID, nous permet d'avoir un jeu de données propre.</p>
+                </div>
+        
+                <!-- Univariate Analysis -->
+                <div id="univariate" class="tab-content">
+                    <br>
+                    <h2>🌍 Répartition des commandes par pays</h2>
+                    <img src="images/Online Sales/Répartition des commandes par pays.jpg" alt="Répartition des commandes par pays" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>La <strong>France</strong> se distingue comme le pays ayant le plus grand nombre de commandes, avec <strong>3820 enregistrements</strong>. D’autres pays tels que la <strong>Suède</strong>, l’<strong>Allemagne</strong> et les <strong>Pays-Bas</strong> affichent des niveaux similaires, reflétant une répartition homogène des ventes.</p>
+                    <h2>📦 Répartition des commandes par catégorie</h2>
+                    <img src="images/Online Sales/Répartition des commandes par categories de produit.jpg" alt="Répartition des commandes par catégorie" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Les catégories <strong>"Furniture" (Mobilier)</strong>, <strong>"Stationery" (Papeterie)</strong> et <strong>"Electronics" (Électronique)</strong> arrivent en légèrement en tête des ventes, chacune enregistrant environ <strong>9000 commandes</strong>. Cette popularité peut s’expliquer par leur usage quotidien ou professionnel. Il serait pertinent d'explorer les raisons de cette préférence pour identifier des opportunités, comme des offres groupées ou des promotions croisées.</p>
+        
+                    <h2>🏢 Répartition des commandes par entrepôt</h2>
+                    <img src="images/Online Sales/Répartition en fonction des warehouses.jpg" alt="Répartition des commandes par entrepôt" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>L’entrepôt d’<strong>Amsterdam</strong> gère un grand volume de <strong>9175 commandes</strong>, ce qui en fait un hub logistique clé. Les autres entrepôts, situés à <strong>Londres</strong>, <strong>Rome</strong>, <strong>Berlin</strong> et <strong>Paris</strong>, présentent des volumes équivalent. Il pourrait être intéressant de réévaluer la capacité des entrepôts secondaires pour répartir les charges et réduire les délais de livraison.</p>
+        
+                    <h2>💳 Méthodes de paiement</h2>
+                    <img src="images/Online Sales/Payment method distribution.jpg" alt="Méthodes de paiement" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Les modes de paiement sont bien répartis entre <strong>virement bancaire</strong>, <strong>carte de crédit</strong> et <strong>PayPal</strong>, avec des volumes respectifs de <strong>15086</strong>, <strong>14907</strong> et <strong>14811 commandes</strong>. Cette flexibilité montre que les clients s'adaptent facilement aux options proposées. Maintenir cette diversité est essentiel, tout en analysant les retours pour ajuster les politiques si nécessaire.</p>
+                    
+                    <h2>⚡ Répartition par priorité de commande</h2>
+                    <img src="images/Online Sales/order priority distrib.jpg" alt="Répartition par priorité de commande" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Les commandes sont réparties équitablement entre les priorités <strong>"Medium"</strong>, <strong>"High"</strong> et <strong>"Low"</strong>. Cela reflète une gestion équilibrée de la demande. Cependant, il est crucial de s’assurer que les commandes à haute priorité sont traitées efficacement pour répondre aux attentes des clients.</p>
+                </div>
+                </div>
+
+        
+                <!-- Evolution des revenus -->
+                <div id="Evolution des revenus" class="tab-content">
+                    <br>
+                    <h2>Evolution des revenus</h2>
+                    <p>Pour analyser les revenus, plusieurs nouvelles <strong>features</strong> ont été créées à partir des données disponibles :</p>
+                    <ul>
+                        <li><strong>Revenue :</strong> Calculé comme le produit de la <strong>quantité</strong> et du <strong>prix unitaire</strong>, après déduction de la <strong>remise</strong> et des <strong>frais de livraison</strong>.</li>
+                        <li><strong>Year, Month, Day :</strong> Dates extraites de la colonne des factures pour une analyse temporelle détaillée.</li>
+                        <li><strong>MonthName, DayName :</strong> Conversion des dates en noms de mois et jours pour une interprétation plus intuitive.</li>
+                        <li><strong>Quarter :</strong> Les données sont également regroupées par trimestre pour observer les tendances.</li>
+                    </ul>
+                    <p>Des graphiques interactifs ont été générés pour visualiser l'<strong>évolution des revenus</strong> :</p>
+                    <ul>
+                        <li>📆 <strong>Évolution des revenus par année :</strong> Le chiffre d’affaires est globalement <strong>stable</strong>, sauf pour 2025, où les données sont <strong>incomplètes</strong>.</li>
+                        <li>📅 <strong>Évolution des revenus par mois :</strong> Une régularité est observée tout au long de l’année.</li>
+                        <li>📊 <strong>Évolution des revenus par trimestre :</strong> Une baisse notable est identifiée au <strong>troisième trimestre 2024</strong>, qui s'explique par l'absence de données sur cette période.</li>
+                    </ul>
+                    <img src="images/Online Sales/Evolution des revenu par trimestre et par mois.jpg" alt="Évolution des revenus" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Ces analyses permettent de mieux comprendre les tendances et d’identifier les périodes de forte ou faible activité. Cela offre une base solide pour adapter les <strong>stratégies marketing</strong> et logistiques.</p>
+                </div>
+        
+                <!-- Bivariate Analysis -->
+                <div id="Segment" class="tab-content">
+                    <h2>📋 Analyse des Performances par Segment en 2024</h2>
+        
+                    <h3>🌍 Revenus par pays</h3>
+                    <img src="images/Online Sales/revenus par pays 2024.jpg" alt="Revenus par pays en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>En 2024, l'<strong>Espagne</strong> est le pays le plus contributeur au chiffre d'affaires, avec un revenu total de <strong>894 753,53 €</strong>, suivie de près par le <strong>Portugal</strong> et la <strong>Suède</strong>. En revanche, la <strong>France</strong>, bien qu’importante en termes de volume de commandes, se classe plus bas en revenus. Cela peut indiquer un panier moyen inférieur dans ce pays.</p>
+        
+                    <h3>📦 Revenus par catégorie</h3>
+                    <img src="images/Online Sales/Revenus par catégories 2024.jpg" alt="Revenus par catégorie en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Les catégories <strong>Furniture</strong> (Mobilier), <strong>Accessories</strong> et <strong>Stationery</strong> (Papeterie) génèrent les revenus les plus élevés. Ces trois segments représentent une part importante du chiffre d'affaires global. Cela reflète leur popularité et leur pertinence pour les consommateurs. On note néanmoins une certaine homogénéité.</p>
+        
+                    <h3>📜 Nombre de factures par catégorie</h3>
+                    <img src="images/Online Sales/Nombre de factures par catégories 2024.jpg" alt="Nombre de factures par catégorie en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>La catégorie <strong>Electronics</strong> (Électronique) enregistre le plus grand nombre de factures, suivie de près par <strong>Accessories</strong> et <strong>Furniture</strong>. Cela suggère une forte demande pour ces produits, bien que leur contribution en revenus soit légèrement inférieure à d'autres catégories.</p>
+        
+                    <h3>🛒 Répartition des revenus par canal de vente</h3>
+                    <img src="images/Online Sales/Répartition des revenus par canal de vente 2024.jpg" alt="Répartition des revenus par canal de vente en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>En 2024, les revenus se répartissent presque équitablement entre les ventes <strong>en ligne</strong> (50,5 %) et celles <strong>en magasin</strong> (49,5 %). Cela indique que les deux canaux de vente sont performants et méritent une attention égale en termes de stratégie et de ressources. On peut s'interroger sur l'efficacité du site internet qui contrairement aux points de vente n'est pas limité par une zone de chalandise et devrait représenter une part plus importante des revenus. A mettre en perspective avec le panier moyen comparé entre les deux canaux.</p>
+        
+                    <h3>📉 Retours produits par catégorie et pays</h3>
+                    <img src="images/Online Sales/Nombre de retour par categ prod .jpg" alt="Retours par catégorie en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Les catégories <strong>Accessories</strong>, <strong>Furniture</strong> et <strong>Stationery</strong> enregistrent le plus grand nombre de retours, avec des volumes similaires. En termes de répartition géographique, les <strong>pays européens</strong> comme l'<strong>Espagne</strong> et le <strong>Portugal</strong> affichent également des volumes élevés de retours.</p>
+                    <img src="images/Online Sales/Nombre de retours par pays 2024.jpg" alt="Retours par pays en 2024" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+                    <br>
+                    <p>Pour réduire ces retours, il serait pertinent d’évaluer les <strong>motifs invoqués</strong> par les clients et d’améliorer les descriptions produits, la qualité ou les délais de livraison selon les besoins identifiés.</p>
+                </div>
+        
+        <!-- Analyse Multivariée -->
+        <div id="multivariate" class="tab-content">
+            <h2>📚 Analyse Multivariée</h2>
+
+            <h3>🌐 Heatmap des revenus par pays et catégorie de produit</h3>
+            <img src="images/Online Sales/heatmap des revenus par categories 2024.jpg" alt="Heatmap des revenus par pays et catégorie" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+            <br>
+            <p>Une <strong>heatmap</strong> montre la répartition des <strong>revenus</strong> par pays et par catégorie en 2024. Ce graphique met en évidence des combinaisons pays/catégorie particulièrement performantes, comme <strong>l'Espagne</strong> pour les meubles et <strong>l'Allemagne</strong> pour les produits électroniques. Ces données permettent d’identifier des opportunités pour des campagnes marketing ciblées.</p>
+
+            <h3>🛒 Répartition des revenus par canal de vente et catégorie de produit</h3>
+            <img src="images/Online Sales/Répartition des revenus par canal de vente et catégories 2024.jpg" alt="Répartition des revenus par canal de vente et catégorie" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+            <br>
+            <p>En 2024, les revenus des différents canaux de vente (en ligne et en magasin) sont décomposés par <strong>catégorie</strong>. Les produits électroniques et les accessoires dominent les ventes en ligne, tandis que les meubles sont majoritairement vendus en magasin. Cela suggère qu’un <strong>alignement stratégique</strong> des catégories sur leurs canaux préférés pourrait maximiser la rentabilité.</p>
+
+            <h3>💳 Revenus et retours par méthode de paiement</h3>
+            <img src="images/Online Sales/Revenus et retours par méthode de paiement.jpg" alt="Revenus et retours par méthode de paiement" style="width: 100%; max-width: 800px; display: block; margin: auto;">
+            
+            <br><p>Les revenus selon les méthodes de paiement montrent que <strong>PayPal</strong> génère le chiffre d'affaires le plus élevé (<strong>3 366 967,14 €</strong>), suivi de près par le <strong>virement bancaire</strong> et la <strong>carte de crédit</strong>. Cependant, les retours sont également légèrement plus nombreux avec PayPal (<strong>262 retours</strong>), ce qui peut indiquer une tendance à des achats impulsifs via ce canal, du à la rapidité de la transaction.</p>
+
+            <p>En comparaison :</p>
+            <ul>
+                <li><strong>Virement bancaire :</strong> 3 282 398,25 € de revenus, mais <strong>268 retours</strong>.</li>
+                <li><strong>Carte de crédit :</strong> 3 202 435,68 € de revenus et <strong>238 retours</strong>, ce qui représente la méthode la plus fiable en termes de retour.</li>
+            </ul>
+            <p>Ces données suggèrent qu’il pourrait être pertinent de renforcer les politiques de retour pour PayPal tout en encourageant des paiements via des méthodes plus stables comme la carte de crédit.</p>
+        </div>
+        
+                <!-- Conclusion -->
+                <div id="conclusion" class="tab-content">
+                    <h2>✅ Conclusion et recommandations</h2>
+                    <p>Les ventes en <strong>ligne</strong> montrent un potentiel supérieur au commerce physique, mais elles nécessitent des <strong>campagnes bien ciblées</strong> pour maximiser leur efficacité. Réduire les <strong>retours</strong>, notamment dans les catégories <strong>Accessories</strong> et <strong>Furniture</strong>, est essentiel pour améliorer la rentabilité globale.</p>
+                    <p>Les pays comme <strong>l'Espagne</strong> et le <strong>Portugal</strong>, bien qu'ayant moins de commandes que la France, génèrent des <strong>revenus plus élevés</strong> grâce à un panier moyen supérieur. Ces régions devraient être des cibles prioritaires pour les efforts marketing.</p>
+                    <p>Enfin, la <strong>logistique</strong> peut être optimisée en répartissant mieux les charges entre <strong>entrepôts</strong> et en ajustant les stocks selon la demande régionale, afin de minimiser les <strong>délais</strong> et les <strong>coûts</strong>.</p>
+                </div>
+        
+            </div>
+        </main>
+        
+        
+        
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Call Center Analysis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #intro {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+        }
+
+        #intro h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        #intro p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        .content-box {
+            background: white;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 10px; /* Espace entre les boutons */
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Rendre les boutons égaux en taille */
+            max-width: 400px; /* Largeur maximale des boutons */
+        }   
+
+        .nav-tabs button:hover {
+            background: #ddd;
+            color: #084110;
+            transform: translateY(-2px); /* Effet de soulèvement au survol */
+        }
+
+        .nav-tabs button.active {
+            background:#bd1128;
+            color: white;
+            border: 2px solid #333;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #f4f4f4;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Left Button -->
+        <a href="index.html" class="return-btn"><i class="fas fa-home"></i></a>
+
+        <!-- Intro -->
+        <div id="intro">
+            <img src="images/Call Center/50-Must-Know-Call-Center-Terminologies-e1652971146644.jpg" alt="Summary">
+            <h1>Call Center<br />Performance Reporting</h1>
+            <p>Ce rapport fait état de la performance d'un call center qui commercialise des produits marketing. Celui-ci s'adresse au directeur régional.</p>
+            <a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a>
+        </div>
+
+        <!-- Main Content -->
+        <main id="main">
+            <div class="content-box">
+
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-link active" data-tab="objectives">Objectives</button>
+                    <button class="tab-link" data-tab="call-measures">Call Relatives Measures</button>
+                    <button class="tab-link" data-tab="revenue-measures">Revenue Relatives Measures</button>
+                    <button class="tab-link" data-tab="performance">Performance</button>
+                    <button class="tab-link" data-tab="tree-analysis">Tree Performance Analysis</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="objectives" class="tab-content active">
+                    <h2>Tables</h2>
+                    <p>Voici les tables qui compose le rapport</p>
+                    <img src="images/Call Center/Tables.jpg" alt="Performance manager and teams" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p>Grands axes d'analyse:</p>
+                    <p><strong>1. Une vision globale du service clients</strong></p>
+                    <ul>
+                        <li>Le nombre d'appels total à différents niveaux</li>
+                        <li>Le taux d'appel Within SLA ou Outside SLA par secteur, bureau etc...</li>
+                        <li>Le temps d'appel moyen</li>
+                        <li>Quelques KPIs</li>
+                    </ul>
+                    <p><strong>2. Une vision des revenus par appels</strong></p>
+                    <ul>
+                        <li>Évolution d'une année à l'autre</li>
+                        <li>Revenu par secteur, équipe etc...</li>
+                    </ul>
+                    <p><strong>3. Une vision des performances des managers et des employés</strong></p>
+                    <ul>
+                        <li>Performances individuelles des managers</li>
+                        <li>Le temps d'attente par équipe/employé</li>
+                    </ul>
+                    <img src="images/Call Center/summary call center.jpg" alt="Summary call center" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                </div>
+
+                <div id="call-measures" class="tab-content">
+                    <h2>KPI Service Client - Appels</h2>
+                    <h3>Points clés :</h3>
+                    <ul>
+                        <li>Un total de 32 846 appels analysés avec une diminution de 0,26 % par rapport à l'année précédente.</li>
+                        <li>Visualisation des appels par trimestre avec des proportions bien équilibrées entre les quatre périodes (environ 25 % pour chaque trimestre).</li>
+                        <li>Les indicateurs tels que la durée moyenne d'appel (12,78 secondes) et le temps d'attente moyen (27 secondes) montrent une performance stable.</li>
+                        <li>Les appels mensuels sont présentés avec une comparaison claire par rapport à l'année précédente.</li>
+                    </ul>
+                    <img src="images/Call Center/KPI Service client call.jpg" alt="Service client call" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br><br>
+                    <h3>Interprétation :</h3>
+                    <p>Ce dashboard met en lumière la stabilité des performances du centre d'appel. Les graphiques circulaires et barres facilitent l’analyse des données temporelles et permettent d’identifier rapidement les périodes de pic ou de creux.</p>
+                </div>
+
+                <div id="revenue-measures" class="tab-content">
+                    <h2>KPI Service Client - Revenus</h2>
+                    <h3>Points clés :</h3>
+                    <ul>
+                        <li>Une croissance impressionnante des revenus de 20,44 % (3,44M € contre 2,85M € l'année précédente).</li>
+                        <li>Les revenus sont segmentés par type d'appel (support technique, facturation, ventes), montrant que le support technique génère le plus de revenus (1,74M €).</li>
+                        <li>La granularité des données par trimestre et par mois offre une vue précise des variations saisonnières.</li>
+                    </ul>
+                    <img src="images/Call Center/KPI Service client revenue.jpg" alt="Service client revenue" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br><br>
+                    <h3>Interprétation :</h3>
+                    <p>Ce tableau de bord démontre l’impact des différents types d’appels sur les revenus et met en avant les points de croissance. Il souligne une stratégie efficace pour maximiser les revenus par interaction client.</p>
+                    
+                </div>
+
+                <div id="performance" class="tab-content">
+                    <h2>Performance Manager et Équipes</h2>
+                    <h3>Points clés :</h3>
+                    <ul>
+                        <li>Analyse des performances des managers et équipes, avec une segmentation par site.</li>
+                        <li>Les indicateurs incluent la durée moyenne d’appel, le temps d’attente et la conformité SLA.</li>
+                        <li>Des graphiques combinant appels totaux et temps d’attente par manager permettent une analyse comparative.</li>
+                    </ul>
+                    <img src="images/Call Center/Performance manager and teams.jpg" alt="Performance manager and teams" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br><br>
+                    <h3>Interprétation :</h3>
+                    <p>Ce dashboard met en avant les performances individuelles et d’équipe, aidant à identifier les points à améliorer ou les meilleures pratiques.</p>
+                    <p>Pour aller plus loin, les Tooltips suivant nous permette de voir la performance des unités rattaché à un manager en particulier, notament sur la SLA compliance et le nombre d'appel.</p>
+                    <img src="images/Call Center/tooltip team sla.jpg" alt="tooltip SLA" style="width: 100%; max-width: 600px; max-height: 600px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <img src="images/Call Center/tooltip teams number of call.jpg" alt="tooltip numb call" style="width: 100%; max-width: 600px; max-height: 600px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                </div>
+
+                <div id="tree-analysis" class="tab-content">
+                    <h2>Distribution des Performances</h2>
+                    <h3>Points clés :</h3>
+                    <ul>
+                        <li>Les arbres de performances visualisent la distribution des appels et des revenus par manager et employé.</li>
+                        <li>Ils permettent une décomposition hiérarchique pour mieux comprendre les contributions individuelles.</li>
+                    </ul>
+                    <img src="images/Call Center/Tree performance analysis.jpg" alt="Performance manager and teams" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                
+                    <br><br>
+                    <h3>Interprétation :</h3>
+                    <p>Ces visualisations aident à identifier les zones de force ou de faiblesse à différents niveaux organisationnels.</p>
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

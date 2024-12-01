@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>London Fire Brigade Analysis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #intro {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro img {
+            width:400 px;
+            height: 400px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+        }
+
+        #intro h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        #intro p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        #header {
+            background: #444;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 1.25rem;
+        }
+
+        #header .logo {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .content-box {
+            background: white;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        /* Conteneur des onglets */
+/* Nouvelle mise en page des onglets de navigation */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 10px; /* Espace entre les boutons */
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Rendre les boutons égaux en taille */
+            max-width: 400px; /* Largeur maximale des boutons */
+        }   
+
+        .nav-tabs button:hover {
+            background: #ddd;
+            color: #084110;
+            transform: translateY(-2px); /* Effet de soulèvement au survol */
+        }
+
+        .nav-tabs button.active {
+            background:#bd1128;
+            color: white;
+            border: 2px solid #333;
+        }
+
+
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .return-btn {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .return-btn.top-left {
+            top: 10px;
+            left: 10px;
+        }
+
+        .return-btn.bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        /* Contenu général des modèles */
+.content {
+    margin-top: 20px;
+    display: none; /* Masquer par défaut */
+}
+
+.content.active {
+    display: block; /* Afficher uniquement la section active */
+}
+
+/* Centrer les images des modèles */
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%; /* Limiter la taille des images */
+}
+
+/* Style pour le sélecteur déroulant */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+select {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    cursor: pointer;
+    max-width: 300px;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Left Button -->
+        <a href="index.html" class="return-btn top-left"><i class="fas fa-home"></i></a>
+
+        <!-- Intro -->
+        <div id="intro">
+            <img src="images/pompier.jpg" alt="London Fire Brigade">
+            <h1>London Fire Brigade<br />Etude du temps d'intervention</h1>
+            <p>
+                Ce projet a pour but d'analyser et prédire le temps de réponse de la London Fire Brigade. Nous identifierons les facteurs qui influent le plus sur ce temps de réponse et apporterons des préconisations.
+            </p>
+            <div id="project-buttons" style="text-align: center; margin-top: 20px;">
+                <!-- Bouton pour GitHub -->
+                <a href="https://github.com/PaulDvn/Portfolio-projects/tree/London-Fire-Brigade" target="_blank" style="text-decoration: none;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #24292e; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔗 Voir le projet sur GitHub
+                    </button>
+                </a>
+            
+                <!-- Bouton pour télécharger le fichier HTML -->
+                <a href="HTML/London Fire Brigade model.html" download style="text-decoration: none; margin-left: 10px;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        📥 Télécharger le fichier HTML
+                    </button>
+                </a>
+                <a href="Datasets/LFB MODEL" download style="text-decoration: none; margin-left: 10px;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        📥 Télécharger le jeu de données
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="main">
+            <div class="content-box">
+
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-link active" data-tab="Introduction">Introduction</button>
+                    <button class="tab-link" data-tab="Exploration_des_données">Exploration des données</button>
+                    <button class="tab-link" data-tab="Nettoyage_et_preprocessing">Nettoyage et preprocessing</button>
+                    <button class="tab-link" data-tab="visualisations">Visualisations</button>
+                    <button class="tab-link" data-tab="modelisation">Modélisation</button>
+                    <button class="tab-link" data-tab="Conclusion">Conclusion</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="Introduction" class="tab-content active">
+                    <br>
+                    <h2>Introduction 🚒</h2>
+                    <p>
+                        J'ai réalisé ce projet dans le cadre de ma formation en <span style="color:brown;">Data analyse</span> chez Datascientest. 
+                        Ce projet fil rouge m'a permis de mettre en pratique les acquis théoriques vus lors de la formation et de me mettre en situation professionnelle.
+                    </p>
+                    <p>
+                        La <span style="color:brown;">problématique</span> que nous cherchons à résoudre par ce projet est la suivante : 
+                        Comment <span style="color:brown;">prédire</span> et <span style="color:brown;">optimiser</span> le temps d’arrivée sur les lieux des incidents des <span style="color:brown;">pompiers</span> de Londres en fonction des 
+                        <span style="color:brown;">effectifs matériels</span>, <span style="color:brown;">humains</span> mis en œuvre, du <span style="color:brown;">type d’incidents</span>, 
+                        du <span style="color:brown;">lieu d’incidents</span> et des <span style="color:brown;">données temporelles</span> 🕒 ?
+                    </p>
+                    <p>Ainsi, les <span style="color:brown;">objectifs</span> du projet sont les suivants :</p>
+                    <ul>
+                        <li>✅ Permettre d’aider les <span style="color:brown;">équipiers pompiers</span> à améliorer leur <span style="color:brown;">temps de réponse</span> aux incidents, c'est-à-dire le temps d’arrivée sur les lieux.</li>
+                        <li>✅ Avoir le <span style="color:brown;">bon nombre d'équipes</span> déployées selon le <span style="color:brown;">type d’incidents</span> et le <span style="color:brown;">lieu d’incidents</span>.</li>
+                    </div>
+                
+                
+
+                    <div id="Exploration_des_données" class="tab-content">
+                        <br>
+                        <h2>Exploration des données 📊</h2>
+                        <p>
+                            Nous exploitons deux <span style="color:brown;">datasets</span> pour notre étude provenant du site de la 
+                            <span style="color:brown;">London Fire Brigade</span>.
+                        </p>
+                        <ul>
+                            <li>🔥 <span style="color:brown;">Mobilisation</span> : contient les détails de chaque <span style="color:brown;">incident</span> traité depuis 
+                                <span style="color:brown;">janvier 2018</span>. Des informations sont fournies sur la <span style="color:brown;">date</span> et le 
+                                <span style="color:brown;">lieu</span> de l'incident ainsi que sur le <span style="color:brown;">type d'incident</span> traité. Il compte 
+                                <span style="color:brown;">713 368 incidents</span>.
+                            </li>
+                            <li>🚒 <span style="color:brown;">Incident</span> : contient les détails des <span style="color:brown;">interventions</span> de chaque 
+                                <span style="color:brown;">camion de pompiers</span> envoyés sur les lieux d'un incident depuis 
+                                <span style="color:brown;">janvier 2021</span> et compte <span style="color:brown;">587 919 interventions</span>.
+                            </li>
+                            <li>📍 <span style="color:brown;">GPS Station</span> : contient les <span style="color:brown;">coordonnées</span> et les spécificités 
+                                <span style="color:brown;">géographiques</span> des stations de pompier londonienne.
+                            </li>
+                        </ul>
+                        <p>
+                            À noter que ces deux jeux de données sont <span style="color:brown;">actualisés</span> tous les trimestres.
+                            De la <span style="color:brown;">fusion</span> de ces trois jeux de données est formé un nouveau jeu de données nommé <span style="color:brown;">"df"</span>.
+                        </p>
+                        <img src="images/LFB model/Jeux de données.png" alt="Jeux de données" 
+                             style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            L'<span style="color:brown;">exploration</span> du jeu de données a amené la <span style="color:brown;">segmentation</span> suivante des 
+                            <span style="color:brown;">variables</span> qui le composent :
+                        </p>
+                        <img src="images/Mapping_catégories_variables.png" alt="Segmentation des variables" 
+                             style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br><br>
+                        <h2>Variable cible 🎯</h2>
+                        <p>
+                            Notre <span style="color:brown;">variable cible</span> est <span style="color:brown;">"AttendanceTimeSeconds"</span>. 
+                            C'est cette variable que nous allons chercher à <span style="color:brown;">prédire</span>. Elle représente le 
+                            <span style="color:brown;">temps total d'intervention</span> et comprend donc le 
+                            <span style="color:brown;">temps de préparation</span> des équipes et le <span style="color:brown;">temps de trajet</span>. 
+                            Le <span style="color:brown;">temps de retour</span> à la caserne n'est donc pas compris.
+                        </p>
+                        <img src="images/Variable_cible.png" alt="Décomposition de la variable cible" 
+                             style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    </div>
+                    
+
+                    <div id="Conclusion" class="tab-content">
+                        <br>
+                        <h2>Insights Principaux 📊</h2>
+                        <p>
+                            Notre <strong style="color:bordeaux;">objectif projet</strong> était de 
+                            <strong style="color:bordeaux;">prédire</strong> le <strong style="color:bordeaux;">temps de réponse</strong> ⏱️ à des interventions de la brigade des pompiers de Londres, 
+                            fonction du <strong style="color:bordeaux;">nombre d'équipes déployées</strong>, du <strong style="color:bordeaux;">type d’incidents</strong> 🔥 et du <strong style="color:bordeaux;">lieu de l’incident</strong> 📍.
+                        </p>
+                        <p>
+                            Nous sommes effectivement capables de <strong style="color:bordeaux;">prédire</strong> avec un 
+                            <strong style="color:red;">intervalle de certitude de 26 secondes</strong> ⏱️ le <strong style="color:bordeaux;">temps d'intervention</strong>. 
+                            Par la <strong style="color:bordeaux;">sélection des variables explicatives</strong> ainsi que les 
+                            <strong style="color:bordeaux;">features importance</strong> et grâce aux <strong style="color:bordeaux;">visualisations</strong>, 
+                            nous sommes en mesure d'établir les <strong style="color:red;">facteurs</strong> qui influencent le plus 
+                            <strong style="color:red;">négativement</strong> ce <strong style="color:bordeaux;">temps d'intervention</strong> :
+                        </p>
+                        <ul>
+                            <li>
+                                Les <strong style="color:bordeaux;">caractéristiques de la zone géographique</strong> 📍 où se situent la caserne et le lieu de l'incident créent de la 
+                                <strong style="color:red;">variance</strong> dans le <strong style="color:bordeaux;">temps d'intervention</strong>. 
+                                Si la zone est très fréquentée (<strong style="color:red;">urbaine</strong>), les temps s'allongent en raison de la 
+                                <strong style="color:red;">circulation</strong> 🚦.
+                            </li>
+                            <li>
+                                En <strong style="color:red;">périphérie</strong> de la ville de Londres, les 
+                                <strong style="color:bordeaux;">temps d'intervention</strong> ont tendance à être plus longs.
+                            </li>
+                            <li>
+                                Une forte concentration des <strong style="color:bordeaux;">incidents</strong> 🔥 est observée en 
+                                <strong style="color:red;">hyper centre</strong>. Malgré cela, seulement 
+                                <strong style="color:green;">3 casernes</strong> peuvent trianguler efficacement les incidents dans ce périmètre.
+                            </li>
+                            <li>
+                                Le nombre de <strong style="color:red;">fausses alarmes</strong> est très important, notamment sur les 
+                                <strong style="color:bordeaux;">incidents à forte criticité</strong>, mobilisant un 
+                                <strong style="color:red;">nombre important de pompes</strong> 🚒 qui ne peuvent être utilisées sur des incidents à proximité.
+                            </li>
+                            <li>
+                                L'<strong style="color:bordeaux;">heure</strong> 🕒 à laquelle la brigade est mobilisée influe également sur le 
+                                <strong style="color:bordeaux;">temps d'intervention</strong>, avec une 
+                                <strong style="color:red;">augmentation</strong> constatée entre 
+                                <strong style="color:green;">10h et 18h</strong>.
+                            </li>
+                            <li>
+                                Les <strong style="color:red;">motifs de retard</strong> incluent le <strong style="color:red;">trafic routier</strong> 🚗, 
+                                les <strong style="color:red;">travaux d'urbanisation</strong> 🚧, et surtout les 
+                                <strong style="color:red;">adresses incorrectes</strong>, sur lesquelles les équipes peuvent intervenir.
+                            </li>
+                        </ul>
+                        <p>
+                            Nos <strong style="color:bordeaux;">métriques de modélisation</strong> 📊 pourront aider le 
+                            <strong style="color:bordeaux;">process métier</strong> de réponse aux appels de la brigade. 
+                            Lors d'un <strong style="color:bordeaux;">incident</strong> 🔥, si une ou plusieurs équipes doivent intervenir, 
+                            la <strong style="color:bordeaux;">plateforme d’appel</strong> 📞 pourra prévoir à 
+                            <strong style="color:red;">26 secondes</strong> près le <strong style="color:bordeaux;">temps d’arrivée</strong>, 
+                            rassurant les citoyens et permettant une <strong style="color:green;">organisation rapide</strong> entre les équipes.
+                        </p>
+                    </div>
+                    
+                    
+
+                    <div id="Nettoyage_et_preprocessing" class="tab-content">
+                        <br>
+                        <h2>Nettoyage et preprocessing 🧹</h2>
+                        <p>
+                            L’<strong style="color:bordeaux;">objectif</strong> 🏁 à la fin de cette étape est d’avoir un <strong style="color:bordeaux;">dataset</strong> 📊 prêt pour effectuer des 
+                            <strong style="color:bordeaux;">analyses approfondies</strong> et une <strong style="color:bordeaux;">modélisation</strong> 🤖 à l’aide de Machine Learning.
+                            Il s’agit d’un <strong style="color:bordeaux;">jeu de données</strong> 🗂️ avec modèle à <strong style="color:bordeaux;">apprentissage supervisé</strong> car les données sont <strong style="color:bordeaux;">labellisées</strong>. 
+                            On cherche à <strong style="color:bordeaux;">prédire</strong> une <strong style="color:bordeaux;">variable cible</strong> identifiée : le <strong style="color:bordeaux;">temps d’arrivée</strong> sur les lieux de l’incident. 
+                            La <strong style="color:bordeaux;">variable cible</strong>, étant une variable quantitative, il s’agit d’un problème de <strong style="color:bordeaux;">régression</strong> 📈.
+                        </p>
+                        <p>
+                            Dans les deux jeux de données <strong style="color:bordeaux;">“Incidents”</strong> et <strong style="color:bordeaux;">“Mobilisation”</strong>, il y a quelques données avec des <em>NaN</em> 🛑, 
+                            que nous allons pouvoir transformer de différentes manières :
+                        </p>
+                        <ul>
+                            <li>Ajout d’une <strong style="color:bordeaux;">nouvelle classe</strong> pour les éléments “nuls” mais qui sont en fait “normaux” car non concernés par la variable.</li>
+                            <li>Imputation avec la méthode <strong style="color:bordeaux;">SimpleImputer</strong> 🧮 de stratégie “médiane” sur les valeurs numériques.</li>
+                            <li>Division des <strong style="color:bordeaux;">dates</strong> 📅 en année, mois, jour, jour de la semaine, heure.</li>
+                            <li>Conversion de certaines colonnes en d’autres <strong style="color:bordeaux;">types</strong>.</li>
+                            <li>Utilisation de la méthode <strong style="color:bordeaux;">bfill</strong> sur les variables catégorielles ayant peu de valeurs nulles, ou le <strong style="color:bordeaux;">mode</strong> si la variable comporte beaucoup de valeurs nulles.</li>
+                        </ul>
+                        <p>
+                            Le <strong style="color:bordeaux;">feature engineering</strong> 🔧, avec la création de <strong style="color:bordeaux;">nouvelles variables</strong> corrélées à la <strong style="color:bordeaux;">variable cible</strong>, a permis après plusieurs itérations 
+                            d'améliorer les performances du modèle. 
+                            Ainsi :
+                        </p>
+                        <ul>
+                            <li>Des <strong style="color:bordeaux;">variables géographiques</strong> 🌍 telles que la distance entre le lieu d'incident et la caserne ont été créées.</li>
+                            <li>L'<strong style="color:bordeaux;">encodage cyclique</strong> 🔄 des variables temporelles et la segmentation par saison et par moment de la journée ont permis une meilleure compréhension par le modèle.</li>
+                            <li>Enfin, un <strong style="color:bordeaux;">indice de criticité</strong> ⚠️ a été déterminé par le <strong style="color:bordeaux;">nombre de pompes</strong> 🚒 envoyées sur le lieu d'incident.</li>
+                        </ul>
+                    </div>
+                    
+
+                    <div id="visualisations" class="tab-content">
+                        <br>
+                        <h2>Visualisations 📊</h2>
+                        
+                        <img src="images/LFB model/temps d'intervention total par année et par type d'incident.jpg" alt="temps d'intervention total par année et par type d'incident" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            On remarque que le <strong style="color:bordeaux;">temps d'intervention total</strong> n'évolue pas par année. En revanche, on note que le <strong style="color:bordeaux;">temps d'intervention</strong> sur les <strong style="color:bordeaux;">fausses alarmes</strong> 🚨 est aussi conséquent que sur d'autres types d'incidents. 
+                            Or des <strong style="color:bordeaux;">équipes mobilisées</strong> 🚒 sur des <strong style="color:bordeaux;">fausses alarmes</strong> ne peuvent l'être sur de <strong style="color:bordeaux;">véritables incidents</strong>. 
+                            Il se peut alors que des équipes provenant de <strong style="color:bordeaux;">casernes plus lointaines</strong> soient mobilisées, allongeant ainsi le <strong style="color:bordeaux;">temps d'intervention</strong>.
+                        </p>
+                        
+                        <img src="images/LFB model/Arrondissement.jpg" alt="Arrondissement" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            Le quartier de <strong style="color:bordeaux;">Westminster</strong> est celui qui voit le plus d'interventions 📍. 
+                            Il se situe en plein <strong style="color:bordeaux;">centre-ville</strong>, littéralement le <strong style="color:bordeaux;">cœur</strong> de Londres.
+                        </p>
+                        
+                        <img src="images/LFB model/Carte-interactive-Incidents.png" alt="Carte-interactive-Incidents" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            On observe sur cette <strong style="color:bordeaux;">map interactive</strong> 🗺️ que <strong style="color:bordeaux;">Westminster</strong> compte <strong style="color:bordeaux;">29 901 incidents</strong> pour seulement <strong style="color:bordeaux;">3 casernes</strong> 🚒 qui triangulent le quartier. 
+                            On peut imaginer <strong style="color:bordeaux;">implanter</strong> d'autres <strong style="color:bordeaux;">stations</strong> pour absorber le nombre d'incidents dans cette zone et accroître la <strong style="color:bordeaux;">performance</strong>.
+                        </p>
+                        
+                        <img src="images/LFB model/Details incidents.jpg" alt="Details incidents" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            On voit ici que les <strong style="color:bordeaux;">fausses alarmes</strong> 🚨 pèsent pour plus de la moitié des incidents. 
+                            Une grande majorité d'entre elles sont liées aux <strong style="color:bordeaux;">alarmes automatiques</strong> 🔔 pour lesquelles les pompiers doivent obligatoirement se déplacer ("AFA").
+                        </p>
+                        
+                        <img src="images/LFB model/Attendance time seconds.jpg" alt="Attendance time seconds" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <p>
+                            La <strong style="color:bordeaux;">moyenne</strong> des <strong style="color:bordeaux;">temps d'intervention</strong> se situe autour de <strong style="color:bordeaux;">300 secondes</strong>, soit <strong style="color:bordeaux;">5 minutes</strong> ⏱️. 
+                            Le parti a été pris de conserver les <strong style="color:bordeaux;">temps d'intervention</strong> proches de <strong style="color:bordeaux;">0</strong> car, en réalité, les pompiers ne partent pas toujours de la caserne mais peuvent aussi se trouver sur les lieux ou à proximité, notamment en cas de <strong style="color:bordeaux;">sur-accident</strong>.
+                        </p>
+                        
+                        <img src="images/LFB model/daytime.jpg" alt="Day time" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br>
+                        <p>
+                            Les <strong style="color:bordeaux;">incidents</strong> semblent avoir lieu majoritairement en <strong style="color:bordeaux;">journée</strong> 🌞, là où la population est la plus active, ce qui est plutôt cohérent.
+                        </p>
+                    </div>
+                    
+
+                    <div id="modelisation" class="tab-content">
+                        <br>
+                        <h2>Modèles Machine Learning 🔍</h2>
+
+                        <p>
+                            Afin de trouver le <strong style="color:bordeaux;">modèle</strong> le plus cohérent et le plus performant, 
+                            la démarche fut de commencer par des <strong style="color:bordeaux;">modèles simples</strong> comme la 
+                            <strong style="color:bordeaux;">régression linéaire</strong> puis d'aller vers des modèles plus complexes 
+                            en fonction de l'évolution des <strong style="color:bordeaux;">métriques d'évaluation</strong>.
+                            Finalement, <strong style="color:bordeaux;">3 modèles</strong> donnent une performance satisfaisante dont le meilleur d'entre eux, 
+                            <strong style="color:bordeaux;">Elastic Net</strong>, détaillé plus en détail les métriques et l'analyse.
+                        </p>
+                        <p>
+                            À noter que les <strong style="color:bordeaux;">variables explicatives</strong> de type numériques ont été 
+                            choisies notamment en fonction de leur <strong style="color:bordeaux;">corrélation</strong> avec la 
+                            <strong style="color:bordeaux;">variable cible</strong>, grâce à la heatmap suivante 📊 :
+                        </p>
+                        <img src="images/LFB model/Heatmap optimisation.png" alt="Jeux de données" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                        <br><br>
+                        <label for="model-select">Sélectionnez un modèle :</label>
+                        <select id="model-select">
+                            <option value="elastic-net">Elastic Net</option>
+                            <option value="random-forest">Random Forest</option>
+                            <option value="lasso">Lasso</option>
+                        </select>
+                    
+                        <!-- Contenu pour Random Forest -->
+                        <div id="random-forest" class="content">
+                            <h3>Random Forest 🌲</h3>
+                            <p>
+                                Modèle populaire pour sa <strong style="color:bordeaux;">facilité d'interprétation</strong> et sa 
+                                <strong style="color:bordeaux;">stabilité</strong>. Utilise des <strong style="color:bordeaux;">arbres de décision</strong> 
+                                pour des tâches de <strong style="color:bordeaux;">régression</strong> ou de <strong style="color:bordeaux;">classification</strong>.
+                            </p>
+                            <p><strong>Meilleurs hyperparamètres :</strong> min_samples_split = 2, max_features = sqrt</p>
+                            <p><strong>Métriques d'évaluation :</strong></p>
+                            <ul>
+                                <li>R² = <strong style="color:bordeaux;">0.841</strong></li>
+                                <li>RMSE = <strong style="color:bordeaux;">47.91</strong></li>
+                                <li>MSE = <strong style="color:bordeaux;">1650.261</strong></li>
+                                <li>MAE = <strong style="color:bordeaux;">32.40</strong></li>
+                                <li>MedAE = <strong style="color:bordeaux;">21.70</strong></li>
+                            </ul>
+                            <img src="images/LFB model/Comparaison-réelles-prédites_RF.png" alt="Comparaison Réel vs Prédit Random Forest">
+                            <img src="images/LFB model/Distribution-erreurs_RF.png" alt="Distribution des Erreurs Random Forest">
+                            <img src="images/LFB model/Analyse-résidus_RF.png" alt="Analyse des Résidus Random Forest">
+                            <img src="images/LFB model/Courbe-résidus-cumulés_RF.png" alt="Courbe des Résidus Random Forest">
+                        </div>
+                    
+                        <!-- Contenu pour Lasso -->
+                        <div id="lasso" class="content">
+                            <h3>Lasso 🎯</h3>
+                            <p>
+                                <strong style="color:bordeaux;">LASSO</strong> (Least Absolute Shrinkage and Selection Operator) est une méthode de 
+                                <strong style="color:bordeaux;">régularisation</strong> qui améliore la <strong style="color:bordeaux;">précision</strong> 
+                                de prédiction et l'<strong style="color:bordeaux;">interprétabilité</strong> du modèle.
+                            </p>
+                            <p><strong>Meilleurs hyperparamètres :</strong> alpha = 0.336</p>
+                            <p><strong>Métriques d'évaluation :</strong></p>
+                            <ul>
+                                <li>R² = <strong style="color:bordeaux;">0.879</strong></li>
+                                <li>RMSE = <strong style="color:bordeaux;">40.623</strong></li>
+                                <li>MSE = <strong style="color:bordeaux;">1650.261</strong></li>
+                                <li>MAE = <strong style="color:bordeaux;">27.941</strong></li>
+                                <li>MedAE = <strong style="color:bordeaux;">15.87</strong></li>
+                            </ul>
+                            <img src="images/LFB model/Comparaison-réelles-prédites_LASSO.png" alt="Comparaison Réel vs Prédit Lasso">
+                            <img src="images/LFB model/Distribution-erreurs_LASSO.png" alt="Distribution des Erreurs Lasso">
+                            <img src="images/LFB model/Analyse-résidus_LASSO.png" alt="Analyse des Résidus Lasso">
+                            <img src="images/LFB model/Courbe-résidus -cumulés_LASSO.png" alt="Courbe des Résidus Lasso">
+                        </div>
+                    
+                        <!-- Contenu pour Elastic Net -->
+                        <div id="elastic-net" class="content">
+                            <h3>Elastic Net 🔗</h3>
+                            <p>
+                                La régularisation <strong style="color:bordeaux;">Elastic Net</strong> combine les techniques 
+                                <strong style="color:bordeaux;">Ridge</strong> et <strong style="color:bordeaux;">Lasso</strong>, permettant de 
+                                conserver des <strong style="color:bordeaux;">variables fortement corrélées</strong> et d'éviter une 
+                                <strong style="color:bordeaux;">sélectivité excessive</strong>.
+                            </p>
+                            <p><strong>Meilleurs hyperparamètres :</strong> l1_ratio = 0.9, alpha = 0.234</p>
+                            <p><strong>Métriques d'évaluation :</strong></p>
+                            <ul>
+                                <li>R² = <strong style="color:bordeaux;">0.878</strong></li>
+                                <li>RMSE = <strong style="color:bordeaux;">40.738</strong></li>
+                                <li>MSE = <strong style="color:bordeaux;">1659.550</strong></li>
+                                <li>MAE = <strong style="color:bordeaux;">26.103</strong></li>
+                                <li>MedAE = <strong style="color:bordeaux;">17.470</strong></li>
+                            </ul>
+                            <img src="images/LFB model/Comparaison-réelles-prédites_ELASTICNET.png" alt="Comparaison Réel vs Prédit Elastic Net">
+                            <p>Le graphique de comparaison des valeurs réelles et prédites montre la relation entre les valeurs observées et celles que le modèle a prédites. La ligne diagonale noire représente l’idéal où les prédictions correspondraient exactement aux valeurs réelles. On peut voir que la majorité des points se regroupent autour de cette ligne, indiquant que le modèle ElasticNet prédit efficacement dans la plupart des cas. Cependant, certains points sont plus dispersés, notamment pour des valeurs élevées ou basses, ce qui signifie que le modèle a plus de mal à capturer les cas extrêmes.</p>
+                            
+                            <img src="images/LFB model/Distribution-erreurs_ELASTIC-NET.png" alt="Distribution des Erreurs Elastic Net">
+                            <p>L'histogramme de la distribution des erreurs montre la fréquence des écarts entre les valeurs prédites et réelles. La courbe qui en résulte est centrée autour de zéro, formant une distribution proche d'une courbe en cloche. Cela indique que la plupart des erreurs de prédiction sont petites, un signe positif quant à la performance globale du modèle. Cependant, la présence de barres plus élevées du côté légèrement négatif indique une tendance du modèle à sous-estimer les temps d'intervention dans certains cas, une observation à prendre en compte pour d'éventuelles optimisations.</p>
+                            
+                            <img src="images/LFB model/Analyse-résidus_ELASTIC-NET.png" alt="Analyse des Résidus Elastic Net">
+                            <p>L’analyse des résidus permet de visualiser comment les erreurs de prédiction (résidus) sont réparties par rapport aux valeurs prédites. Sur ce graphique, la majorité des résidus sont répartis autour de la ligne de zéro, ce qui est un bon signe d’un modèle bien équilibré. Toutefois, on peut observer une certaine dispersion et des valeurs extrêmes négatives, ce qui signale que le modèle sous-estime la variable cible dans certains cas spécifiques. Cette dispersion peut indiquer la présence de facteurs non capturés ou de relations non linéaires entre les variables que le modèle n’a pas complètement prises en compte.</p>
+                            
+                            <img src="images/LFB model/Courbe-résidus-cumulés_ELASTIC-NET.png" alt="Courbe des Résidus Elastic net">
+                            <p>La courbe des résidus cumulés est un outil efficace pour observer la proportion des erreurs accumulées. Dans ce cas, la courbe montre que la majorité des résidus s’accumulent rapidement autour de zéro, ce qui signifie que la plupart des erreurs de prédiction sont faibles. Une telle courbe confirme la précision globale du modèle ElasticNet. Cependant, on remarque que des erreurs plus importantes, bien que rares, sont visibles aux extrémités, indiquant des zones où le modèle pourrait bénéficier d'une optimisation pour mieux gérer ces cas atypiques.</p>
+                            
+                        </div>
+                    </div>
+                    
+                    </div>
+                    
+
+
+    <script>
+        // Récupérer le sélecteur et les sections de contenu
+        const modelSelect = document.getElementById('model-select');
+        const contents = document.querySelectorAll('.content');
+
+        // Fonction pour afficher le contenu correspondant
+        modelSelect.addEventListener('change', () => {
+            const selectedModel = modelSelect.value;
+
+            // Masquer tous les contenus
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Afficher le contenu correspondant
+            const activeContent = document.getElementById(selectedModel);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
+        });
+
+        // Initialiser avec le premier modèle visible
+        document.getElementById(modelSelect.value).classList.add('active');
+    </script>
+
+
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

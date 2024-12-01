@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>London Fire Brigade Performance</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #intro {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+        }
+
+        #intro h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        #intro p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        .content-box {
+            background: white;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 10px; /* Espace entre les boutons */
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Rendre les boutons égaux en taille */
+            max-width: 400px; /* Largeur maximale des boutons */
+        }   
+
+        .nav-tabs button:hover {
+            background: #ddd;
+            color: #084110;
+            transform: translateY(-2px); /* Effet de soulèvement au survol */
+        }
+
+        .nav-tabs button.active {
+            background:#bd1128;
+            color: white;
+            border: 2px solid #333;
+        }
+
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #f4f4f4;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Left Button -->
+        <a href="index.html" class="return-btn"><i class="fas fa-home"></i></a>
+
+        <!-- Intro -->
+        <div id="intro">
+            <img src="images/LFB Report/US_Navy_080730-N-5277R-003_A_Commander,_Naval_Forces_Japan_firefighter_douses_a_fire_on_a_dummy_aircraft_during_the_annual_off-station_mishap_drill_at_Naval_Support_Facility_Kamiseya.jpg" alt="London Fire Brigade report">
+            <h1>London Fire Brigade<br />Rapport de perfomance</h1>
+            <p>Dans la continuité du projet 1, je propose un rapport clef en main qui pourrait être exploité par la London Fire Brigade pour visualiser ses performances. Ce rapport a été réalisé sur PowerBi, construit à partir des jeux de données "mobilisation" et "incident". Il est destiné aux commandants de caserne ou tout autre officier de grade supérieur. </p>
+        
+            <a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a>
+        </div>
+
+        <!-- Main Content -->
+        <main id="main">
+            <div class="content-box">
+
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-link active" data-tab="incident-insight">Incident Insight</button>
+                    <button class="tab-link" data-tab="station-information">Stations Informations</button>
+                    <button class="tab-link" data-tab="temporal-information">Temporal Informations</button>
+                    <button class="tab-link" data-tab="geographic-information">Geographic Informations</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="incident-insight" class="tab-content active">
+                    <br>
+                    <h2>Tables qui composent le rapport</h2>
+                    <img src="images/LFB Report/Tables.jpg" alt="Data incident" style="width: 100%; max-width: 1100px; max-height: 2100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <h2>Incident Insight</h2>
+                    <p>La première page du rapport reprend les principaux objectifs de la London Fire Brigade:</p>
+                    <ul>
+                        <li>Temps moyen d'arrivée du premier équipage : 6 min </li>
+                        <li>Temps moyen d'arrivée du second équipage : 8 min</li>
+                        <li>Premier équipage arrivé en moins de 10 min : 90 % des cas</li>
+                        <li>Premier équipage arrivé en moins de 12 min : 95 % des cas</li>
+                    </ul>
+                    <p>Les jauges sur la moitié haute viennent comparer les moyennes de temps d'intervention de l'année filtrée avec l'objectif de temps fixé.</p>
+                    <img src="images/LFB Report/Incident.jpg" alt="Data incident" style="width: 100%; max-width: 1100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p>Nous avons ensuite le nombre d'incident par année ainsi que l'évolution du cout moyen des incidents. Enfin, un visuel des motifs de retards et leurs nombre.</p>
+
+                    <img src="images/LFB Report/Zoom incident.jpg" alt="Data incident" style="width: 100%; max-width: 1100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p> Les commandants de caserne pourront retrouver ici tout les métriques concernant chaque incidents pris en charge par leurs équipes. Ils peuvent également rechercher les informations d'un incident en particulier.</p>
+                </div>
+
+                <div id="station-information" class="tab-content">
+                    <br>
+                    <h2>Stations Informations</h2>
+                    <p>Analyse des performances des stations :</p>
+                    <ul>
+                        <li>Principaux insights regroupés en tableau pour une lecture rapide.</li>
+                        <li>Comptage des pompes envoyées par incidents.</li>
+                        <li>Evolution du temps de réponse moyen par stations.</li>
+                        <li>Evolution du temps de réponse moyen par équipage.</li>
+                    </ul>
+                    <img src="images/LFB Report/Station performance.jpg" alt="Stations Performance" style="width: 100%; max-width: 1100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                </div>
+
+                <div id="temporal-information" class="tab-content">
+                    <br>
+                    <h2>Temporal Informations</h2>
+                    <p>Insights temporels :</p>
+                    <ul>
+                        <li>Analyse du nombre d'incidents selon les jours de la semaine.</li>
+                        <li>Distribution des incidents en fonction de si ils ont lieu la seaine ou le week end.</li>
+                        <li>Distribution des incidents par mois et par saisons.</li>
+                        <li>Répartition des incidents en fonction du moment dans la journée.</li>
+                        <br>
+                    </ul>
+                    <img src="images/LFB Report/Timing.jpg" alt="Timing" style="width: 100%; max-width: 1100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                </div>
+
+                <div id="geographic-information" class="tab-content">
+                    <br>
+                    <h2>Geographic Informations</h2>
+                    <p>Analyse géographique des interventions :</p>
+                    
+                    <p>Cette slide propose un visuel de la position géographique des incidents en fonction de la station choisie.</p>
+                      
+                    <img src="images/LFB Report/Geographic by station.jpg" alt="Timing" style="width: 100%; max-width: 1100px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Prédiction de Faillite</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #intro {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid white;
+        }
+
+        #intro h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        #intro p {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+        }
+
+        .content-box {
+            background: white;
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            gap: 10px; /* Espace entre les boutons */
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Rendre les boutons égaux en taille */
+            max-width: 800px; /* Largeur maximale des boutons */
+        }   
+
+        .nav-tabs button:hover {
+            background: #ddd;
+            color: #084110;
+            transform: translateY(-2px); /* Effet de soulèvement au survol */
+        }
+
+        .nav-tabs button.active {
+            background:#bd1128;
+            color: white;
+            border: 2px solid #333;
+        }
+
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Left Button -->
+        <a href="index.html" class="return-btn"><i class="fas fa-home"></i></a>
+
+        <!-- Intro -->
+        <div id="intro">
+            <img src="images/Compagny bankrupcy/red arrow.jpg" alt="Compagny bankrupcy">
+            <h1>Compagny Bankrupcy<br />Analyse prédictive de faillite d'entreprises</h1>
+            <p>Analyse des indicateurs de rentabilité, de performance et d'autres ratios financiers pour déterminer la possible banqueroute des entreprises grâce à un modèle de machine learning.</p>
+            <div id="project-buttons" style="text-align: center; margin-top: 20px;">
+                <!-- Bouton pour GitHub -->
+                <a href="https://github.com/PaulDvn/Portfolio-projects/tree/Compagny-Bankrupcy-predictions" target="_blank" style="text-decoration: none;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #24292e; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔗 Voir le projet sur GitHub
+                    </button>
+                </a>
+            
+                <!-- Bouton pour télécharger le fichier HTML -->
+                <a href="HTML/Faillite d'entreprise.html" download style="text-decoration: none; margin-left: 10px;">
+                    <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        📥 Télécharger le fichier HTML
+                    </button>
+                    <a href="Datasets/Company Bankruptcy Prediction" download style="text-decoration: none; margin-left: 10px;">
+                        <button style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            📥 Télécharger le jeu de données
+                        </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="main">
+            <div class="content-box">
+
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs">
+                    <button class="tab-link active" data-tab="dataset">Présentation du Dataset</button>
+                    <button class="tab-link" data-tab="insights">Contexte et objectifs</button>
+                    <button class="tab-link" data-tab="Corrélations linéaire et distribution de la variable cible">Corrélations linéaire et distribution de la variable cible</button>
+                    <button class="tab-link" data-tab="Modèle SMOTE">Modèle SMOTE</button>
+                    <button class="tab-link" data-tab="Analyse en composante principale">Analyse en composante principale</button>
+                    <button class="tab-link" data-tab="Regression logistique">Regression logistique</button>
+                    <button class="tab-link" data-tab="Conclusion">Conclusion</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="dataset" class="tab-content active">
+                    <br>
+                    <h2>💹 Rentabilité et performance opérationnelle</h2>
+                    <ul>
+                        <li><strong>ROA(C) before interest and depreciation before interest</strong> : Rentabilité des actifs après déduction des amortissements, mais avant intérêts. Indique l’efficacité de l’entreprise dans l’utilisation de ses actifs pour générer des profits.</li>
+                        <li><strong>ROA(A) before interest and % after tax</strong> : Rentabilité des actifs après impôts et avant intérêts. Mesure la rentabilité nette des actifs après fiscalité.</li>
+                        <li><strong>ROA(B) before interest and depreciation after tax</strong> : Rentabilité des actifs après impôts et amortissements. Approche plus conservatrice de la rentabilité.</li>
+                        <li><strong>Operating Gross Margin</strong> : Marge brute opérationnelle = (Revenu - Coût des biens vendus) / Revenu. Indique la rentabilité brute avant coûts fixes.</li>
+                        <li><strong>Realized Sales Gross Margin</strong> : Marge brute réalisée sur les ventes. Approfondit la rentabilité brute en tenant compte des revenus effectivement réalisés.</li>
+                        <li><strong>Operating Profit Rate</strong> : Ratio du bénéfice d’exploitation par rapport aux revenus totaux.</li>
+                        <li><strong>Pre-tax net Interest Rate</strong> : Rendement net avant impôts après déduction des charges d’intérêts.</li>
+                        <li><strong>After-tax net Interest Rate</strong> : Rendement net après impôts, tenant compte des charges financières et fiscales.</li>
+                        <li><strong>Continuous interest rate (after tax)</strong> : Mesure de l'intérêt effectif après impôts, souvent utilisé pour évaluer les dettes longues.</li>
+                        <li><strong>Operating Expense Rate</strong> : Proportion des dépenses opérationnelles par rapport au chiffre d’affaires.</li>
+                        <li><strong>Research and Development Expense Rate</strong> : Pourcentage des dépenses en recherche et développement sur le revenu total.</li>
+                    </ul>
+                
+                    <h2>💵 Flux de trésorerie et par action</h2>
+                    <ul>
+                        <li><strong>Cash Flow Rate</strong> : Ratio du flux de trésorerie sur le revenu total.</li>
+                        <li><strong>Cash Flow Per Share</strong> : Flux de trésorerie rapporté au nombre d'actions, mesurant la génération de liquidités par action.</li>
+                        <li><strong>Revenue Per Share (Yuan ¥)</strong> : Revenu total rapporté au nombre d’actions, donnant une vue sur les revenus réalisés par action.</li>
+                        <li><strong>Operating Profit Per Share (Yuan ¥)</strong> : Profit opérationnel par action.</li>
+                        <li><strong>Per Share Net profit before tax (Yuan ¥)</strong> : Profit net avant impôts par action.</li>
+                    </ul>
+                
+                    <h2>📈 Croissance et rentabilité</h2>
+                    <ul>
+                        <li><strong>Realized Sales Gross Profit Growth Rate</strong> : Taux de croissance de la marge brute réalisée sur les ventes.</li>
+                        <li><strong>Operating Profit Growth Rate</strong> : Taux de croissance du bénéfice d’exploitation.</li>
+                        <li><strong>After-tax Net Profit Growth Rate</strong> : Taux de croissance du bénéfice net après impôts.</li>
+                        <li><strong>Total Asset Growth Rate</strong> : Taux de croissance des actifs totaux.</li>
+                        <li><strong>Net Value Growth Rate</strong> : Taux de croissance de la valeur nette (fonds propres).</li>
+                        <li><strong>Total Asset Return Growth Rate Ratio</strong> : Ratio de croissance des retours sur actifs.</li>
+                    </ul>
+                
+                    <h2>💧 Liquidité et structure financière</h2>
+                    <ul>
+                        <li><strong>Current Ratio</strong> : Actifs courants / Passifs courants. Mesure la capacité de l’entreprise à couvrir ses dettes à court terme.</li>
+                        <li><strong>Quick Ratio</strong> : (Actifs liquides - Stocks) / Passifs courants. Indicateur plus strict de liquidité.</li>
+                        <li><strong>Interest Expense Ratio</strong> : Dépenses d’intérêts / Revenus. Évalue le poids des charges financières.</li>
+                        <li><strong>Total Debt/Total Net Worth</strong> : Ratio de l’endettement total sur les fonds propres. Indique le niveau d'endettement.</li>
+                        <li><strong>Debt Ratio %</strong> : Total des dettes / Total des actifs. Mesure la proportion des actifs financés par la dette.</li>
+                        <li><strong>Quick Assets/Total Assets</strong> : Actifs liquides / Actifs totaux. Mesure la liquidité relative.</li>
+                        <li><strong>Cash/Total Assets</strong> : Trésorerie / Actifs totaux.</li>
+                    </ul>
+                
+                    <h2>📦 Gestion des actifs et des stocks</h2>
+                    <ul>
+                        <li><strong>Total Asset Turnover</strong> : Chiffre d’affaires / Actifs totaux. Mesure l'efficacité de l’utilisation des actifs.</li>
+                        <li><strong>Inventory Turnover Rate (times)</strong> : Coût des ventes / Inventaire moyen. Évalue la rapidité avec laquelle les stocks sont renouvelés.</li>
+                        <li><strong>Accounts Receivable Turnover</strong> : Ventes nettes / Comptes clients moyens. Évalue l’efficacité dans la collecte des créances.</li>
+                        <li><strong>Fixed Assets Turnover Frequency</strong> : Revenus / Actifs fixes. Indique l’utilisation des immobilisations pour générer des revenus.</li>
+                        <li><strong>Working Capital to Total Assets</strong> : Fonds de roulement / Actifs totaux. Mesure la part des actifs financée par le fonds de roulement.</li>
+                    </ul>
+                
+                    <h2>📋 Autres ratios financiers</h2>
+                    <ul>
+                        <li><strong>Equity to Liability</strong> : Fonds propres / Passifs. Indique la solidité financière relative.</li>
+                        <li><strong>Degree of Financial Leverage (DFL)</strong> : Indique dans quelle mesure une entreprise utilise la dette pour augmenter ses bénéfices.</li>
+                        <li><strong>Interest Coverage Ratio (Interest expense to EBIT)</strong> : Capacité à couvrir les charges d’intérêts avec le bénéfice avant intérêts et impôts.</li>
+                        <li><strong>Liability-Assets Flag</strong> : Indicateur binaire montrant si le passif dépasse les actifs.</li>
+                    </ul>
+                </div>
+                
+                <div id="insights" class="tab-content">
+                    <br>
+                    <h2>📌 Contexte et objectifs principaux</h2>
+                    <p>Les entreprises sont confrontées à divers <strong>risques financiers</strong>, et la <strong>faillite</strong> est une des issues les plus graves qui peut résulter d'une <strong>gestion financière inadéquate</strong>. Les institutions financières, les investisseurs et les gestionnaires d'entreprises ont besoin de <strong>méthodes robustes</strong> pour évaluer la <strong>santé financière</strong> d'une entreprise et prédire les <strong>risques de faillite</strong> avant qu'ils ne se matérialisent. Avec la montée en puissance de <strong>l'analyse des données</strong> et des techniques de <strong>machine learning</strong>, il est possible d'utiliser des <strong>données financières historiques</strong> pour prédire avec <strong>précision</strong> les risques de faillite. 🚨</p>
+                    
+                    <p><strong>Problématique :</strong><br>  
+                        Comment prédire la <strong>probabilité de faillite</strong> d'une entreprise en utilisant des <strong>données financières historiques</strong> pour améliorer les <strong>décisions de gestion</strong> et de <strong>prévention des risques</strong> ?</p>
+                    
+                    <p><strong>Questions clefs :</strong></p>
+                    <ul>
+                        <li>🧮 Quelles sont les <strong>variables financières</strong> les plus <strong>prédictives</strong> de la faillite ?</li>
+                        <li>⚖️ Comment les <strong>déséquilibres de classe</strong> dans les données affectent-ils la performance du modèle, et quelles <strong>techniques</strong> peuvent être utilisées pour les gérer ?</li>
+                        <li>📊 Comment les <strong>résultats du modèle</strong> peuvent-ils être utilisés pour améliorer la <strong>gestion des risques</strong> et la <strong>prise de décision</strong> dans les <strong>institutions financières</strong> et les <strong>entreprises</strong> ?</li>
+                    </ul>
+                </div>
+
+                <div id="Corrélations linéaire et distribution de la variable cible" class="tab-content">
+                    <br>
+                    <h2>📈 Corrélations linéaires</h2>
+                    <p>Cette <strong>heatmap</strong> permet de repérer les <strong>corrélations</strong> existantes entre les variables.</p>
+                    <img src="images/Compagny bankrupcy/heatmap.jpg" alt="Heatmap" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br><br>
+                    <img src="images/Compagny bankrupcy/top 10 correl.jpg" alt="Top 10 correlation" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p>Les variables <strong>Operating Gross Margin</strong>, <strong>Realized Sales Gross Margin</strong>, et <strong>Gross Profit to Sales</strong> sont fortement corrélées, indiquant une similitude dans leur impact sur la <strong>rentabilité</strong>. Les indicateurs de valeur par action, tels que <strong>Net Value Per Share (A)</strong>, <strong>Net Value Per Share (B)</strong>, et <strong>Net Value Per Share (C)</strong>, ont une relation presque parfaite, suggérant une <strong>forte redondance</strong>. Une <strong>corrélation négative</strong> marquée entre <strong>Debt Ratio %</strong> et <strong>Net Worth/Assets</strong> montre que l'<strong>endettement élevé</strong> réduit la proportion de fonds propres dans les actifs. <strong>Borrowing Dependency</strong> et <strong>Net Income to Stockholder's Equity</strong> présentent une corrélation négative importante, indiquant que des entreprises fortement dépendantes de la dette ont des rendements réduits pour les actionnaires. 🔍</p>
+                
+                    <h2>📊 Distribution de notre variable cible</h2>
+                    <img src="images/Compagny bankrupcy/distrib variable.jpg" alt="Distribution variable cible" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p><strong>Déséquilibre de classes important :</strong></p>
+                    <ul>
+                        <li>La majorité des entreprises appartiennent à la classe <strong>0 (non en faillite)</strong>.</li>
+                        <li>Les entreprises en faillite (<strong>classe 1</strong>) représentent une très faible proportion des données.</li>
+                        <li>Sur <strong>6819 entreprises</strong>, <strong>6599</strong> ne sont pas en faillite (97%) et <strong>220</strong> entreprises sont en faillite (3%).</li>
+                    </ul>
+                    <p>Ce <strong>déséquilibre de classes</strong> peut entraîner un <strong>biais</strong> du modèle lors de l'apprentissage. Sans traitement, le modèle pourrait se concentrer uniquement sur la prédiction de la classe majoritaire (<strong>0</strong>) et ignorer la minoritaire (<strong>1</strong>). C'est pourquoi nous allons utiliser une méthode <strong>SMOTE</strong> pour créer des exemples synthétiques de la classe <strong>1</strong> sous-représentée. Pour évaluer ce type de modèle, il faudra donc se concentrer sur :</p>
+                    <ul>
+                        <li>🔍 Le <strong>Recall</strong> pour déterminer correctement les entreprises en faillite.</li>
+                        <li>⚖️ Le <strong>F1-score</strong> pour trouver un équilibre entre précision et rappel.</li>
+                        <li>📈 La courbe <strong>AUC ROC</strong> pour évaluer la capacité du modèle à distinguer les deux classes.</li>
+                    </ul>
+                </div>
+
+                <div id="Modèle SMOTE" class="tab-content">
+                    <br>
+                    <h2>Modèle SMOTE</h2>
+                    <p>Mettons en oeuvre le modèle SMOTE:</p>
+                    <img src="images/Compagny bankrupcy/SMOTE.jpg" alt="Distribution variable cible" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p>Nous obtenons par la suite la distribution suivante</p>
+                    <ul>
+                        <li>Avant SMOTE: 6599 entreprise en bonne santé financière, 220 en faillite</li>
+                        <li>Après SMOTE: 6599 entreprise en bonne santé financière, 6599 en faillite </li>
+                    </ul>
+                    <p> Nous allons ensuite procéder à l'encodage de X_smote, et séparer au hold out de notre jeu de données.</p>
+                </div>
+                <div id="Analyse en composante principale" class="tab-content">
+                    <br>
+                    <h2>Analyse en composante principale</h2>
+                    <p>Le dataset contient 96 variables financières (colonnes), ce qui est très élevé. Un grand nombre de variables peut  introduire du bruit dans le modèle, allonger le temps de calcul et causé des problèmes de multicolinéarité car comme nous l'avons vu, certaines variables sont très corrélées entre elles . Ces variables n'apportent donc pas de nouvelles information et complexifie le modèle qui peut alors sur apprendre et négliger les variables pertinentes dans le bruit de données. Ainsi l'analyse en composante principale transforme les variables d'origine en un nombre réduit tout en conservant une grande partie de l'information. Cela simplifie les données sans perdre les relations importantes. . </p>
+                    <img src="images/Compagny bankrupcy/ACP.jpg" alt="ACP" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <p>Courbe bleue : Ratio de variance expliquée, la prpoprtion de variance capturée par chaque composante principale.
+                        Courbe Orange: Ration de variance expliquée cumulée, la somme cumulative des proportions de variance expliquée par les composantes principales.
+                        La ligne jaune indique le nombre optimal de composantes principales.
+                    </p>
+                    <p> On voit que pour 42 composantes, 90% de la variance totale des données est capturée. Au delà, les composantes peuvent etre ignorée car elles contribuent peu à la variance globale.
+                        Les 10 premières composantes expliquent environ 50% de la variance, quelques composantes sufisent donc à capter l'information.
+                    </p>
+
+                </div>
+                <div id="Regression logistique" class="tab-content">
+                    <h2>Regression logistique</h2>
+                    <p>Notre variable cible est binaire: 0 si l'entreprise n'est pas en faillite et 1 si elle l'est. Nos prédictions vont donc se trouver dans l'une de ces deux classes. Nous sommes donc dans un problème de classification binaire. Nous utiliserons la regresion logistique pour nos prédictions.</p>
+                    <p>La recherche des meilleurs paramètres avec GridSearch nous donne les valeurs suivantes: Meilleurs paramètre PCA regression logistique: {'C': 0.1, 'penalty': 'l1', 'solver': 'liblinear', 'tol': 0.01}</p>
+                    <ul>
+                        <li><b>'C'</b> : 0.1</li>
+                        <li><b>'penalty'</b> : l1</li>
+                        <li><b>'solver'</b>: liblinear</li>
+                        <li><b>'tol'</b>: 0.01</li>
+                    </ul>
+                    <p>Les prédictions de notre modèle de regressin linéaire nous donnent la matrice de confusion suivante.</p>
+                    <img src="images/Compagny bankrupcy/Matrice de confusion.jpg" alt="Matrice de confusion" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <h2>📊 Prédictions correctes et incorrectes</h2>
+                    <p><strong>Prédictions correctes :</strong> Le modèle a effectué <strong>3517 prédictions correctes</strong> (vrais positifs + vrais négatifs).</p>
+                    <p><strong>Prédictions incorrectes :</strong> Il a réalisé <strong>443 prédictions incorrectes</strong> (faux positifs + faux négatifs).</p>
+                    <p>Cela montre que, globalement, le modèle est <strong>efficace</strong>, mais il reste une certaine <strong>marge d’erreur</strong> à corriger.</p>
+                    <h2>🔍 Analyse des métriques par classe</h2>
+
+                    <p><strong> +Accuracy (Précision globale) :</strong> 88.81 %</p>
+                    <p>L’accuracy mesure la proportion totale des prédictions correctes (toutes classes confondues).
+                    Une accuracy de <strong>88.81 %</strong> est un bon score, mais il peut être insuffisant dans des cas où la classe minoritaire (comme la faillite) a un <strong>impact critique</strong>.</p>
+
+                    <p><strong> +Précision (Precision) :</strong> 87.31 %</p>
+                    <p>La précision mesure la proportion des prédictions positives correctes parmi toutes les prédictions positives (vrais positifs / (vrais positifs + faux positifs)).
+                    Ici, <strong>87.31 %</strong> signifie que lorsque le modèle prédit une entreprise en faillite, il a raison dans <strong>87.31 % des cas</strong>.
+                    Le modèle a une bonne précision, mais il reste un <strong>risque de faux positifs</strong> qui peuvent poser problème si une entreprise est classée "à risque" à tort.</p>
+
+                    <p><strong> +Sensibilité (Recall) :</strong> 90.48 %</p>
+                    <p>La sensibilité (ou recall) mesure la proportion des cas positifs correctement identifiés (vrais positifs / (vrais positifs + faux négatifs)).
+                    Avec <strong>90.48 %</strong>, le modèle identifie efficacement la majorité des entreprises en faillite.
+                    Le modèle est bon pour détecter les entreprises en difficulté (faibles faux négatifs), ce qui est <strong>crucial</strong> dans ce contexte.</p>
+
+                    <p><strong> +Spécificité :</strong> 87.18 %</p>
+                    <p>La spécificité mesure la proportion des cas négatifs correctement identifiés (vrais négatifs / (vrais négatifs + faux positifs)).
+                    À <strong>87.18 %</strong>, le modèle détecte correctement la majorité des entreprises qui ne sont pas en faillite.
+                    Bien que le modèle soit efficace, il y a un certain nombre de <strong>faux positifs</strong> (257 cas), ce qui pourrait inquiéter des entreprises non à risque.</p>
+
+                    <h2>⚖️ F1 Score</h2>
+                    <p><strong>F1 Score :</strong> 88.87 %</p>
+                    <p>Le F1 score combine la précision et la sensibilité en une seule métrique (harmonique), ce qui est utile lorsque les classes sont déséquilibrées.
+                    <strong>88.87 %</strong> est un bon équilibre entre <strong>précision</strong> (éviter les faux positifs) et <strong>sensibilité</strong> (réduire les faux négatifs).
+                    Le modèle est bien équilibré et performant pour prédire les entreprises en faillite tout en limitant les erreurs.</p>
+                    
+                    <h2>📈 Description de la courbe ROC</h2>
+                    <p>La courbe <strong>ROC (Receiver Operating Characteristic)</strong> est utilisée pour évaluer les performances d’un modèle de classification.</p>
+                    <p>Elle trace le <strong>taux de vrais positifs</strong> (True Positive Rate ou Recall) en fonction du <strong>taux de faux positifs</strong> (False Positive Rate) pour différents seuils de décision.</p>
+                    <p><strong>Les éléments clés :</strong></p>
+                    <ul>
+                        <li><strong>Courbe rouge :</strong> Représente les performances du modèle.</li>
+                        <li><strong>Ligne bleue pointillée :</strong> Représente une classification aléatoire (aucune capacité discriminative).</li>
+                    </ul>
+                    <img src="images/Compagny bankrupcy/AUC ROC.jpg" alt="Matrice de confusion" style="width: 100%; max-width: 900px; display: block; margin: auto; border: 1px solid #ccc; border-radius: 10px;">
+                    <br>
+                    <h2>🔍 Observations</h2>
+                    <p>La courbe ROC monte rapidement vers le coin supérieur gauche, ce qui indique une <strong>bonne capacité discriminative</strong> du modèle.</p>
+                    <p>L’aire sous la courbe (<strong>AUC, Area Under the Curve</strong>) n’est pas directement visible ici, mais elle est probablement très proche de <strong>1</strong>, indiquant une bonne performance du modèle.</p>
+                
+                    <h2>📊 Interprétation des zones</h2>
+                    <ul>
+                        <li><strong>Coin supérieur gauche (performances optimales) :</strong>
+                            <ul>
+                                <li>Lorsque le modèle maximise les vrais positifs tout en minimisant les faux positifs.</li>
+                                <li>Le modèle semble s’approcher de cette zone, ce qui reflète sa performance.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Proche de la diagonale (classification aléatoire) :</strong>
+                            <ul>
+                                <li>Une courbe proche de la ligne bleue pointillée indiquerait un modèle sans capacité discriminative.</li>
+                                <li>Ici, la courbe rouge est bien éloignée de cette ligne, montrant que le modèle est significativement meilleur qu’un choix aléatoire.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                
+                    <h2>✅ Points forts du modèle</h2>
+                    <ul>
+                        <li><strong>Capacité discriminative élevée :</strong>
+                            <ul>
+                                <li>Le modèle est capable de bien distinguer les entreprises en faillite (classe 1) de celles non en faillite (classe 0).</li>
+                                <li>La courbe monte rapidement, ce qui montre une sensibilité élevée dès les premiers seuils de décision.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Faible taux de faux positifs :</strong>
+                            <ul>
+                                <li>La courbe commence près de l’origine et reste éloignée de la diagonale, indiquant que le modèle génère peu de faux positifs.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                
+                    <h2>⚠️ Limites potentielles</h2>
+                    <p>La courbe ROC donne une évaluation globale des performances à différents seuils, mais elle ne reflète pas toujours les problèmes spécifiques liés à la <strong>classe minoritaire</strong> (faillite).</p>
+                </div>
+
+                <div id="Conclusion" class="tab-content">
+                    <h2>✅ Points forts du modèle</h2>
+                    <ul>
+                        <li><strong>Bonne sensibilité (90.48 %) :</strong> Le modèle identifie correctement la majorité des entreprises en faillite.</li>
+                        <li><strong>Bon F1 score (88.87 %) :</strong> Indique un bon compromis entre précision et rappel.</li>
+                        <li><strong>Spécificité et précision solides :</strong> Le modèle est également fiable pour identifier les entreprises non en faillite.</li>
+                    </ul>
+
+                    <h2>❗ Points faibles ou axes d'amélioration</h2>
+                    <ul>
+                        <li><strong>Faux positifs :</strong> Avec 257 faux positifs, certaines entreprises sont incorrectement classées comme "à risque". Cela peut causer des inquiétudes ou avoir des impacts négatifs sur ces entreprises.</li>
+                        <li><strong>Faux négatifs :</strong> Bien que limités à 186 cas, les faux négatifs représentent des entreprises en difficulté non détectées. Celles-ci pourraient passer inaperçues et ne pas recevoir une attention préventive suffisante.</li>
+                    </ul>
+
+                    <h2>📌 Application des résultats</h2>
+                    <p>Le modèle est adapté pour des cas où il est <strong>crucial de détecter les entreprises en difficulté</strong> (haute sensibilité), même au prix de quelques faux positifs.</p>
+                    <p>Dans un contexte où chaque faux négatif (faillite non détectée) peut avoir des <strong>conséquences graves</strong>, ces résultats sont <strong>encourageants</strong>.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                tabLinks.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
